@@ -1,0 +1,73 @@
+<h3>♥ 待診療案例全覽 ♥</h3>
+<!--button type="button" class = "btn btn-outline-primary" routerLink="/newpt" >初診掛號</button-->
+
+
+<!--button type="button" class="btn btn-dark">Dark</button>-->
+<!--label for="query">查询:</label> <input type="text" id="pidquery" name="查詢"-->
+<!--label for="pidquery">查询:</label-->
+<div class="query-container">
+  <!--input type="text" id="pidquery" name="查詢" title="请输入身分證號"-->
+  <input type="text" [(ngModel)]="pidquery" name="查詢" title="请输入身分證號">
+ 
+  <button mat-mini-fab aria-label="Query" (click)="jump2row()"> 
+    <img src= "../../assets/images/放大鏡.jpg" alt="Search" display="block" margin="auto" height="20px" width="20px">
+  </button> 
+  <div class="button-container">
+  <button mat-fab aria-label="Add new patient" (click)="newcase()"> 
+    <img src= "../../assets/images/Booking0711.jpg" alt="Booking" display="block" margin="auto" height="30px" width="30px">
+  </button> 
+  </div>
+</div>
+<!--待診清單-->
+<table #myTable>
+  <thead>
+    <tr>
+      <th>科別      </th>
+      <th>病人姓名      </th>
+      <th>出生日期        </th>
+      <th>性別      </th>
+      <th>最近治療日期      </th>
+      <th>主治物理治療師 </th>
+      <th>身分證號      </th>
+      <th>連絡電話      </th>
+      <th>個案流水號      </th>
+      <th>...   </th>
+    </tr>
+  </thead>
+  <tbody> 
+    <tr *ngFor="let eachcase of caselist" [routerLink]="['/eachcase', eachcase.caseid]"(click)="rowclick($event)">
+      <td>{{ eachcase.casetype }}</td>
+      <td>{{ eachcase.pat }}</td>
+      <td>{{ eachcase.birthdate | date:'yyyy-MM-dd'}}</td>
+      <td>{{ eachcase.gender }}</td>
+      <td>{{ eachcase.startdate | date:'yyyy-MM-dd'}}</td>
+      <td>{{ eachcase.manager }}</td>
+      <td>{{ eachcase.pid }}</td>
+      <td>{{ eachcase.phoneno }}</td>
+      <td>{{ eachcase.caseid }}</td>
+      <td>
+      <div style="display: flex; justify-content: space-between;">
+        <button mat-fab (click)="writeHDoc('PhThx', 'P123456789')"> 
+          <img src= "../../assets/images/Stethoscope1.png" alt="PT" display="block" margin="auto" height="38px" width="38px">
+        </button> 
+        <div style="width: 10px;"></div>
+        <button mat-fab (click)="writeHDoc('WorkEnv', 'P123456789')"> 
+          <img src= "../../assets/images/工作分析.jpg" alt="WEnv" display="block" margin="auto" height="30px" width="30px">
+        </button> 
+        <div style="width: 10px;"></div>
+        <!--button mat-fab (click)="writeHDoc('WorkEnvA', 'P123456789')"> 
+          <img src= "../../assets/images/KB.jpg" alt="WEnvA" display="block" margin="auto" height="50px" width="50px">
+        </button--> 
+        <button mat-fab (click)="writeHDoc('WorkEnv', 'P123456789')"> 
+          <img src= "../../assets/images/歷史紀錄.jpg" alt="WEnv" display="block" margin="auto" height="38px" width="38px">
+        </button> 
+        <div style="width: 10px;"></div>
+        <button type="submit" class=" myappbtn btn btn-primary" (click)="writeHDoc('CaseNote', 'P123456789')">個案分析
+          <img src="../../../assets/images/Stethoscope0.png" height="35px" width="35px"/>
+        </button>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>

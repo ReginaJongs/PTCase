@@ -1,0 +1,70 @@
+<!--<button class="btn btn-primary" (click)="login()">caption</button>
+<header>申請單據與文件<br/>-->
+<!--button id = "btn_autodef" class="btn btn-primary" (click)="autodef()>智慧引入</button>
+<button id="btn_autodef" class="btn btn-primary" [disabled]="options.formState.isButtonDisabled"(click)="autodef()">智慧引入</button>
+本來的HTML 如下-->
+<!--button id="btn_autodef" class="btn btn-primary" (click)="autodef()">智慧引入</button>-->
+<html lang="zh-Hant">
+<head>
+  <title>Document</title>
+</head>
+<body>
+
+<div style="display: flex; justify-content: space-between; align-items: center;">
+   <!--h4> {{ formTitle }}</h4-->
+   <div style="display: flex; align-items: center; margin-left: auto;">
+     <button mat-fab title="異動儲存" (click)="formdatasave()" style="margin-right: 10px;"> 
+       <img src= "../../assets/images/submit3.png" alt="SBMT" display="block" margin="auto" height="50px" width="50px">
+     </button> 
+     <button mat-fab title="表單列印" (click)="printForm()" style="margin-right: 10px;"> 
+      <img src= "../../assets/images/print2.png " alt="SBMT" display="block" margin="auto" height="50px" width="50px">
+     </button> 
+   </div>
+</div>
+  <!--form [formGroup]="form" (ngSubmit)="onSubmit()"-->
+  <div class="formtest">
+    <h4> {{ formTitle }}</h4>
+    <form [formGroup]="form">
+      <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form">
+        <div *ngFor="let tab of fields; let i = index" (click)="setActiveTab(i)" [ngClass]="{'formly-tab': true, 'formly-tab-active': activeTab === i}">
+          {{ tab.props?.label }} || 測試tab
+        </div>
+        <ng-container *ngIf="fields && fields[activeTab] && fields[activeTab].fieldGroup">
+          <formly-field *ngFor="let field of fields[activeTab].fieldGroup" [field]="field"></formly-field>
+        </ng-container>
+      </formly-form>
+    </form>
+  </div>
+
+</body>
+</html>
+
+
+
+<!--
+<div class="formNfield">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-field" *ngFor="let field of fields">
+      <label>{{ field.templateOptions?.label }}</label>
+      <formly-field [field]="field"></formly-field>
+    </div>
+  </form>
+</div>
+  
+<mat-tab-group>
+  <mat-tab 
+        *ngFor="let tab of fields.fieldGroup; let i = index; let last = last"
+
+      [label]="tab.label"
+      [disabled]="index !== 0 ">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <formly-form
+        [form]="form"
+          [model]="model"
+          [fields]="tab.fields"
+          [options]="options" >
+        </formly-form>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+-->

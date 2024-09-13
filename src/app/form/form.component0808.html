@@ -1,0 +1,51 @@
+<!--<button class="btn btn-primary" (click)="login()">caption</button>
+<header>申請單據與文件<br/>-->
+<!--button id = "btn_autodef" class="btn btn-primary" (click)="autodef()>智慧引入</button>
+<button id="btn_autodef" class="btn btn-primary" [disabled]="options.formState.isButtonDisabled"(click)="autodef()">智慧引入</button>
+本來的HTML 如下-->
+<!--button id="btn_autodef" class="btn btn-primary" (click)="autodef()">智慧引入</button>-->
+<div style="display: flex; justify-content: space-between;">
+   <h4> {{ formTitle }}</h4>
+   <button mat-fab (click)="formdatasave()"> 
+     <img src= "../../assets/images/submit3.png" alt="SBMT" display="block" margin="auto" height="50px" width="50px">
+   </button> 
+</div>
+  <!--form [formGroup]="form" (ngSubmit)="onSubmit()"-->
+  <div class="formtest">
+    <form [formGroup]="form">
+      <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form">
+        <formly-link [urlKey]="0"></formly-link>
+      </formly-form>
+    </form>
+  </div>
+
+
+
+
+<!--
+<div class="formNfield">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-field" *ngFor="let field of fields">
+      <label>{{ field.templateOptions?.label }}</label>
+      <formly-field [field]="field"></formly-field>
+    </div>
+  </form>
+</div>
+  
+<mat-tab-group>
+  <mat-tab 
+        *ngFor="let tab of fields.fieldGroup; let i = index; let last = last"
+
+      [label]="tab.label"
+      [disabled]="index !== 0 ">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <formly-form
+        [form]="form"
+          [model]="model"
+          [fields]="tab.fields"
+          [options]="options" >
+        </formly-form>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+-->

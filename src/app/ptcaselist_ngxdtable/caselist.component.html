@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky Header and Table Header</title>
+  <style>
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      background-color: white;
+      z-index: 1000;
+      padding: 10px 0;
+    }
+    .query-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .button-container {
+      margin-left: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      position: sticky;
+      top: 60px; /* 調整這個值以適應你的 sticky-header 高度 */
+      background-color: rgb(161, 206, 236);
+      z-index: 999;
+    }
+    .sticky-header + table th {
+      top: 128px; /* 調整這個值以適應你的 sticky-header 高度 */
+    }
+    button.center-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .col-width {
+      width: 330px; /* 設定欄寬為200像素 */
+    }
+    .row-height{
+      height: 10px; /* 設定列高度為50像素 */
+    }
+  </style>
+</head>
+<body>
+  <div class="sticky-header">
+    <h3>♥ 待診療案例全覽 ♥</h3>
+    <div class="query-container">
+      <input type="text" [(ngModel)]="pidquery" name="查詢" title="请输入身分證號">
+      <button mat-mini-fab aria-label="Query" title="查詢身分證號" (click)="jump2row(1)">
+        <img src="../../assets/images/Q1.png" alt="Search" height="40px" width="60px">
+      </button>
+      <div class="button-container">
+        <button mat-fab aria-label="Add new patient" title="建立初診紀錄" (click)="newcase()" class="center-img">
+          <img src="../../assets/images/Booking0711.png" alt="Booking" height="40px" width="40px">
+        </button>
+      </div>
+    </div>
+  </div>
+  <!--待診清單-->
+  <div style="padding: 0 38px;">
+    <ngx-datatable
+      class="material"
+      [rows]="filteredCases"
+      [columns]="[
+        { prop: 'casetype', name: '科別' },
+        { prop: 'pat', name: '病人姓名' },
+        { prop: 'birthdate', name: '出生日期' },
+        { prop: 'gender', name: '性別' },
+        { prop: 'startdate', name: '最近治療日期' },
+        { prop: 'manager', name: '主治物理治療師' },
+        { prop: 'pid', name: '身分證號'},
+        { prop: 'phoneno', name: '連絡電話' },
+        { prop: 'clinicid', name: '診所', canAutoResize: false, cellTemplate: clinicidTemplate },
+        { prop: 'caseid', name: '個案流水號', canAutoResize: false , cellTemplate: caseidTemplate},
+        { prop: 'courseid', name: '診次流水號', canAutoResize: false, cellTemplate: courseidTemplate }
+      ]"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="38"
+      [limit]="10"
+      [sorts]="[{ prop: 'casetype', dir: 'asc' }]"
+      [externalSorting]="true" (sort)="onSort($event)"
+    >
+    </ngx-datatable>
+  </div>
+
+  <ng-template #clinicidTemplate let-row="row">
+    <span *ngIf="showit">{{ row.clinicid }}</span>
+  </ng-template>
+  <ng-template #caseidTemplate let-row="row">
+    <span *ngIf="showit">{{ row.caseid }}</span>
+  </ng-template>
+  <ng-template #courseidTemplate let-row="row">
+    <span *ngIf="showit">{{ row.courseid }}</span>
+  </ng-template>
+</body>
+
+</html>

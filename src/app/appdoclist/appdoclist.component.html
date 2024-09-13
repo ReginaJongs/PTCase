@@ -1,0 +1,38 @@
+<h1>申請文件表列</h1>
+<table>
+  <thead>
+    <tr>
+      <th>申請表名稱      </th>
+      <th>修改版次      </th>
+      <th>最近修改日期      </th>
+      <th>單據流水號      </th>
+      <!--<th>JSON內容   jsonbody   </th> -->
+      <th>專案代號        </th>
+      <th>版型序號        </th>
+      <th>...   </th>
+    </tr>
+  </thead>
+
+<!--separator  <app-doc-list>這個不用加============================-->
+
+  <tbody>
+    <!--<tr *ngFor="let eachdoc of appdoclist" [routerLink]="['/eachdoc', eachdoc.appdoc_id]">-->
+
+<tr *ngFor="let eachdoc of appdoclist" >
+      <td>{{ eachdoc.doc_name }}</td>
+      <td>{{ eachdoc.version_code }}</td>
+      <!--<td>{{ eachdoc.edit_date  | date:'yyyy-MM-dd'}}</td>-->
+      <td>{{ eachdoc.edit_date | date:'yyyy-MM-dd'}}</td>
+      <td>{{ eachdoc.appdoc_id }}</td>
+      <td>{{ eachdoc.app_proj_code }}</td>
+      <td>{{ eachdoc.formpattern_id }}</td>
+
+      <td>
+        <button [routerLink]="['/form', eachdoc.appdoc_id, eachdoc.formpattern_id]">編輯</button>
+        <!--button routerLink="/form">編輯</button>-->
+       
+      </td>
+    </tr>
+  </tbody>
+
+

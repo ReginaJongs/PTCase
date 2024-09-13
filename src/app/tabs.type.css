@@ -1,0 +1,14 @@
+.mat-tab-group ::ng-deep .mat-tab-label {
+  background-color: #a99797 !important;
+  color: #333333 !important;
+}
+
+.mat-tab-group ::ng-deep .mat-tab {
+  background-color: #a99797 !important;
+  color: #333333 !important;
+}
+
+.mat-tab-group ::ng-deep .mat-tab-label.mat-tab-label-active {
+  background-color: #ffffff !important;
+  color: #ff0000 !important;
+}

@@ -1,0 +1,26 @@
+.form-field0 {
+    display: flex !important; /* 使用 Flexbox */
+    align-items: center !important; /* 垂直居中對齊 */
+    margin-bottom: 1px !important; /* 每個欄位之間的間距 */
+  }
+  
+  .form-field0 label {
+    margin-right: 10px !important; /* label 與輸入框之間的間距 */
+    min-width: 100px !important; /* label 的最小寬度，根據需要調整 */
+  }
+  
+  .form-field0 input,
+  .form-field0 select,
+  .form-field0 textarea {
+    flex: 1 !important; /* 讓輸入框填滿剩餘空間 */
+  }
+  .form-field input {
+    flex: 1;
+    display: flex;/* block, flex */
+    align-items: center; /* 垂直居中對齊 */
+    margin-bottom: 1px; /* 每個欄位之間的間距 */
+    margin: 8px 0;
+    background-color: rgb(243, 130, 130); /* 覆蓋背景顏色 */
+    border: 1px solid #5d0505; /* 覆蓋邊框樣式 */
+    padding: 5px; /* 覆蓋內邊距 */
+  }

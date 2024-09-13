@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky Header and Table Header</title>
+  <style>
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      background-color: white;
+      z-index: 1000;
+      padding: 10px 0;
+    }
+    .query-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .button-container {
+      margin-left: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      position: sticky;
+      top: 60px; /* 調整這個值以適應你的 sticky-header 高度 */
+      background-color: rgb(161, 206, 236);
+      z-index: 999;
+    }
+    .sticky-header + table th {
+      top: 128px; /* 調整這個值以適應你的 sticky-header 高度 */
+    }
+    button.center-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .col-width {
+      width: 330px; /* 設定欄寬為200像素 */
+    }
+    .row-height{
+      height: 10px; /* 設定列高度為50像素 */
+    }
+  </style>
+</head>
+<body>
+  <div class="sticky-header">
+    <h3>♥ 待診療案例全覽 ♥</h3>
+    <div class="query-container">
+      <input type="text" [(ngModel)]="pidquery" name="查詢" title="请输入身分證號">
+      <button mat-mini-fab aria-label="Query" title="查詢身分證號"  (click)="jump2row(1)" >
+        <img src="../../assets/images/Q1.png" alt="Search" height="40px" width="60px">
+      </button>
+      <div class="button-container">
+        <button mat-fab aria-label="Add new patient" title="建立初診紀錄" (click)="newcase()" class="center-img">
+          <img src="../../assets/images/Booking0711.png" alt="Booking" height="40px" width="40px">
+        </button>
+      </div>
+    </div>
+  </div>
+<!--待診清單-->
+<table #myTable border="1">
+  <thead>
+    <tr>
+      <th>科別      </th>
+      <th>病人姓名      </th>
+      <th>出生日期        </th>
+      <th>性別      </th>
+      <th>最近治療日期      </th>
+      <th>主治物理治療師 </th>
+      <th>身分證號      </th>
+      <th>連絡電話      </th>
+      <th *ngIf="showit">診所 </th>
+      <th *ngIf="showit">個案流水號</th>
+      <th *ngIf="showit" >診次流水號</th>
+      <th class="col-width">相關健康紀錄(新增或歷史查詢) </th>
+    </tr>
+  </thead>
+  <tbody> 
+    <tr *ngFor="let eachcase of caselist" [routerLink]="['/eachcase', eachcase.caseid]"(click)="rowclick($event)" class="row-height">
+      <td>{{ eachcase.casetype }}</td>
+      <td>{{ eachcase.pat }}</td>
+      <td>{{ eachcase.birthdate | date:'yyyy-MM-dd'}}</td>
+      <td>{{ eachcase.gender }}</td>
+      <td>{{ eachcase.startdate | date:'yyyy-MM-dd'}}</td>
+      <td>{{ eachcase.manager }}</td>
+      <td>{{ eachcase.pid }}</td>
+      <td>{{ eachcase.phoneno }}</td>
+      <td *ngIf="showit">{{ uclinic }}</td>
+      <td *ngIf="showit">{{ eachcase.caseid }}</td>
+      <td *ngIf="showit">{{ eachcase.courseid }}</td>
+      <td>
+      <div style="display: flex; justify-content: space-between;">
+        <button mat-fab (click)="createHDoc('PhThx', eachcase.courseid, eachcase.caseid)" title="新增 診療紀錄"> 
+          <img src= "../../assets/images/Stethoscope1.png" alt="PT" display="block" margin="auto" height="38px" width="38px">
+        </button> 
+        <div style="width: 10px;"></div>
+        <button mat-fab (click)="createHDoc('WorkEnv', eachcase.courseid, eachcase.caseid)" title="新增 工作分析"> 
+          <img src= "../../assets/images/工作分析.png" alt="WEnv" display="block" margin="auto" height="30px" width="30px">
+        </button> 
+        <!--button mat-fab (click)="writeHDoc('WorkEnvA', 'P123456789')"> 
+          <img src= "../../assets/images/KB.jpg" alt="WEnvA" display="block" margin="auto" height="50px" width="50px">
+        </button--> 
+        <button type="submit" class="myappbtn btn btn-primary" (click)="createHDoc('CaseNote', eachcase.courseid, eachcase.caseid)" title="新增 健康分析報告">報告
+          <img src="../../../assets/images/Stethoscope0.png" height="35px" width="35px"/>
+        </button>
+        <button mat-fab label="相關健康紀錄(新增或歷史查詢)" title="查詢病歷紀錄" [routerLink]="['/pthdoclist', 'PTHosp', eachcase.pid]" class="center-img"> 
+          <img src= "../../assets/images/HISDoc.png" alt="hisdoc" display="block" margin="auto" height="45px" width="45px">
+        </button> 
+        <!--div style="width: 10px;"></div-->
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

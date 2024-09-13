@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky Header and Table Header</title>
+  <style>
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      background-color: white;
+      z-index: 1000;
+      padding: 10px 0;
+    }
+    .query-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .button-container {
+      margin-left: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      position: sticky;
+      top: 60px; /* 調整這個值以適應你的 sticky-header 高度 */
+      background-color: rgb(188, 212, 117);
+      z-index: 999;
+    }
+    .sticky-header + table th {
+      top: 128px; /* 調整這個值以適應你的 sticky-header 高度 */
+    }
+    button.center-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .row-height{
+      height: 50px; /* 設定列高度為50像素 */
+    }
+  </style>
+</head>
+
+<body>
+<div class="sticky-header">
+   <h3>病人健康紀錄</h3>
+</div>
+<div class="query-container"></div>
+<!--健康紀錄清單-->
+<table #myTable>
+  <thead>
+    <tr>
+      <th>紀錄表      </th>
+      <th>主治物理治療師  </th>
+      <th>治療日期        </th>
+      <th>病歷記錄者     </th>
+      <th>最後編輯日期   </th>
+      <th>身分證   </th>
+      <th *ngIf="showit">診所代號   </th>
+      <th *ngIf="showit">紀錄表流水號      </th>
+      <th *ngIf="showit">紀錄表版號      </th>
+      <th>查閱編輯  </th>
+    </tr>
+  </thead>
+  <tbody> 
+    <tr class="row-height" *ngFor="let eachhdoc of hDoclist" [routerLink]="['/eachhdoc', eachhdoc.hdocid]">
+      <td>{{ eachhdoc.doc_name }}</td>
+      <td>{{ eachhdoc.therapist}}</td>
+      <td>{{ eachhdoc.thedate | date:'yyyy-MM-dd'}}</td>
+      <td>{{ eachhdoc.builder }}</td>
+      <td>{{ eachhdoc.builddate | date:'yyyy-MM-dd'}}</td>
+      <td>{{ eachhdoc.pid }}</td>
+      <td *ngIf="showit">{{ eachhdoc.clinicid }}</td>
+      <td *ngIf="showit">{{ eachhdoc.hdocid }}</td>
+      <td *ngIf="showit">{{ eachhdoc.docpat_id }}</td>
+      <td>
+      <div style="display: flex; justify-content: space-between;">
+        <button mat-fab [routerLink]="['/form', eachhdoc.hdocid, eachhdoc.docpat_id]" title="調整紀錄表內容"> 
+          <img src= "../../assets/images/ed3-Photoroom.png" alt="PT" display="block" margin="auto" height="58px" width="58px">
+        </button> 
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,154 @@
+
+/* 頁籤樣式 */
+.tab123 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  background-color: #4CAF50;
+  box-shadow: 0 0 10px rgba(13, 102, 39, 0.1);
+  padding: 20px;
+  color: rgb(247, 240, 108);
+}
+
+/* 頁籤按鈕樣式 */
+.tab button {
+  position: relative;
+  display: block;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* 頁籤按鈕樣式 - 活動狀態 */
+.tab button.active {
+  color: #fff;
+  background-color: #007bff;
+}
+
+/* 頁籤按鈕樣式 - 活動狀態下的指示器 */
+.tab button.active::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #007bff transparent;
+}
+
+/* 頁籤內容樣式 */
+.tabcontent {
+  display: none;
+  padding: 20px;
+  background-color: #deeff7;
+  box-shadow: 0 0 100px rgba(241, 40, 93, 0.1);
+}
+
+/* 表單欄位樣式 
+.formly-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}*/
+
+/* 表單欄位標籤樣式 
+.formly-field label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}*/
+
+/* 表單欄位輸入框樣式 
+.formly-field input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.3s ease;
+}*/
+
+/* 表單欄位輸入框樣式 - 焦點狀態 
+.formly-field input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}*/
+
+/* 表單按鈕樣式 */
+button[type="submit"] {
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* 表單按鈕樣式 - 滑鼠懸停狀態 */
+button[type="submit"]:hover {
+  background-color: #0069d9;
+}
+button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.btn {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.formly-field-group {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.formly-field {
+  flex: 1 0 30%; /* grow, shrink, basis */
+  margin: 5px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+.formly-control {
+  height: 60px; /* 設定輸入欄位的高度 */
+  line-height: 60px; /* 設定輸入欄位的行高，使文字垂直置中 */
+}
+.formly-form {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+.formly-field-radio .mat-radio-label {
+  display: inline-block !important;
+  margin-right: 10px !important;
+}

@@ -1,0 +1,104 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+.formly-field-radio .mat-radio-label {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+/*===========================================================*/
+.form-field {
+  display: flex;/* block, flex */
+  align-items: center; /* 垂直居中對齊 */
+  margin-bottom: 1px; /* 每個欄位之間的間距 */
+  margin: 8px 0;
+}
+
+.form-field label {
+  margin-right: 10px; /* label 與輸入框之間的間距 */
+  min-width: 20px; /* label 的最小寬度，根據需要調整 */
+}
+
+.form-field select,
+.form-field textarea {
+  flex: 1; /* 讓輸入框填滿剩餘空間 */
+}
+
+.form-field input {
+  display: flex;/* block, flex */
+  align-items: center; /* 垂直居中對齊 */
+  margin-bottom: 1px; /* 每個欄位之間的間距 */
+  margin: 8px 0;
+  background-color: rgb(243, 130, 130); /* 覆蓋背景顏色 */
+  border: 1px solid #5d0505; /* 覆蓋邊框樣式 */
+  padding: 5px; /* 覆蓋內邊距 */
+}
+/*=================================================*/
+.newspaper-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 兩欄 */
+    gap: 16px; /* 欄位之間的間距 */
+  }
+
+.newspaper-layout2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 兩欄 */
+    gap: 16px; /* 欄位之間的間距 */
+    padding: 0 20px; /* 左右留白 */
+  }
+
+.newspaper-layout3 {
+    display: grid ;/*grid*/
+    grid-template-columns: 1fr 1fr 1fr; /* 三欄 */
+    gap: 16px; /* 欄位之間的間距 */
+    padding: 0 20px; /* 左右留白 */
+  }
+.newspaper-layout4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* 四欄 */
+    gap: 5px; /* 欄位之間的間距 */
+    padding: 0 20px; /* 左右留白 */
+  }
+
+.newspaper-layout4-1616 {
+    display: grid;
+    grid-template-columns: 5fr 30fr 5fr 30fr; /* 四欄調整欄寬 */
+    gap: 5px; /* 欄位之間的間距 */
+    padding: 0 20px; /* 左右留白 */
+}
+
+.custom-date-field {  /*0811暫時無用*/ /*.formly-field 先挪開這個 0811*/
+  /* 這裡添加你想要的樣式 */
+  grid-column: span 2; /* 例如，讓這些欄位跨越兩列 */
+  padding: 10px; /* 添加內邊距 */
+  background-color: #f9f9f9; /* 背景顏色 */
+  border: 1px solid #ccc; /* 邊框 */
+  }
+.form-item {
+    display: flex;
+    align-items: center;
+    margin-top: 20px; /* 0811與頁籤標籤之間的間隔 */
+  }
+  
+.form-item label {
+    flex: 1; /* label 占據一部分空間 */
+    margin-right: 10px; /* 0811label 與輸入框之間的間距 */
+  }
+  
+.form-item input {
+    flex: 2; /* 0811輸入框占據剩餘空間 */
+  }
+
+.tab {
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer; /*pointer grab;*/
+  }
+  
+.tab-active {
+    background-color: #023279; /* 活躍頁籤的底色 */
+  }
+
+::ng-deep .newspaper-layout2 label {
+    color: red;  /*  color: blue; color: darkred;*/
+    }

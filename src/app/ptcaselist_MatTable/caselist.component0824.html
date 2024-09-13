@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      background-color: white;
+      z-index: 1000;
+      padding: 10px 0;
+    }
+    .query-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .query-container input {
+      margin-right: 10px;
+    }
+    .query-container button {
+      margin-right: 10px;
+    }
+    .button-container {
+      margin-left: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      position: sticky;
+      top: 60px; /* 調整這個值以適應你的 sticky-header 高度 */
+      z-index: 999;
+      height: 30px;
+      background-color: rgb(50, 34, 120); color: rgb(51, 22, 109);
+    }
+    .sticky-header + table th {
+      top: 128px; /* 調整這個值以適應你的 sticky-header 高度 */
+    }
+    button.center-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+/*================================*/
+    .header-cell {
+      position: sticky;
+      background-color: rgb(97, 170, 210) !important;
+      color: rgb(244, 244, 248) !important;
+      height: 20px !important; /* 設置表頭高度 */
+    }
+    .data-cell {
+    background-color: rgb(207, 208, 209) !important;
+    height: 20px !important;; /* 設置資料列高度 */
+    }
+  .even-row {
+    background-color: #f2f2f2;
+  }
+  .odd-row {
+    background-color: white;
+  }
+  </style>
+  <div class="sticky-header">
+    <h3>♥ 待診療案例全覽 ♥</h3>
+    <div class="query-container">
+      <input type="text" [(ngModel)]="pidquery" name="查詢" title="请输入身分證號">
+      <button mat-mini-fab aria-label="Query" title="查詢身分證號">
+        <img src="../../assets/images/Q1.png" alt="Search" height="40px" width="60px">
+      </button>
+      <button mat-fab aria-label="Add new patient" title="建立初診紀錄" class="center-img">
+        <img src="../../assets/images/Booking0711.png" alt="Booking" height="40px" width="40px">
+      </button>
+    </div>
+  </div>
+
+<body>
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+    <!-- 定義列 -->
+    <ng-container matColumnDef="casetype">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> 科別 </th>
+      <td mat-cell *matCellDef="let element" class="data-cell"> {{element.casetype}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pat">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> 病人 </th>
+      <td mat-cell *matCellDef="let element" class="data-cell"> {{element.pat}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="birthdate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> 出生日期 </th>
+      <td mat-cell *matCellDef="let element" class="data-cell"> {{element.pbirthdateat}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> 性別 </th>
+      <td mat-cell *matCellDef="let element" class="data-cell"> {{element.gender}} </td>
+    </ng-container>
+    <ng-container matColumnDef="startdate">
+      <th mat-header-cell *matHeaderCellDef class="header-cell"> 最近診療日期 </th>
+      <td mat-cell *matCellDef="let element" class="data-cell"> {{element.startdate}} </td>
+    </ng-container>
+    <ng-container matColumnDef="manager">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> 主治 </th>
+      <td mat-cell *matCellDef="let element" class="data-cell"> {{element.manager}} </td>
+    </ng-container>
+    <ng-container matColumnDef="pid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> 身分證 </th>
+      <td mat-cell *matCellDef="let element" class="data-cell"> {{element.pid}} </td>
+    </ng-container>
+    <ng-container matColumnDef="phoneno">
+      <th mat-header-cell *matHeaderCellDef class="header-cell"> 連絡電話 </th>
+      <td mat-cell *matCellDef="let element" class="data-cell"> {{element.phoneno}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="clinicid">
+      <th mat-header-cell *matHeaderCellDef class="header-cell"> 院所</th>
+      <td mat-cell *matCellDef="let element" class="data-cell"> {{element.clinicid}} </td>
+    </ng-container>
+    <ng-container matColumnDef="caseid">
+      <th mat-header-cell *matHeaderCellDef class="header-cell"> 個案流水號 </th>
+      <td mat-cell *matCellDef="let element" class="data-cell"> {{element.caseid}} </td>
+    </ng-container>
+    <ng-container matColumnDef="courseid">
+      <th mat-header-cell *matHeaderCellDef class="header-cell"> 診次流水號 </th>
+      <td mat-cell *matCellDef="let element" class="data-cell"> {{element.courseid}} </td>
+    </ng-container>
+   
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-cell"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="data-cell"></tr>
+    <!--ng-container *ngFor="let caseRow of dataSource.data; let rowIndex = index">
+      <tr mat-row *matRowDef="let caseRow; columns: displayedColumns;" [ngClass]="{'even-row': rowIndex % 2 === 0, 'odd-row': rowIndex % 2 !== 0}"></tr>
+    </ng-container-->  
+  </table>
+  <mat-paginator #paginator [length]="dataSource.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 20, 25]" 
+       showFirstLastButtons (page)="onPageChange($event)"></mat-paginator>
+  
+</body>
+
+</html>
